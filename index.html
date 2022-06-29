@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Length Converter</title>
+</head>
+
+<body>
+    <h2>Length Converter v2.0</h2>
+    <p>Type a value to Convert</p>
+    <table>
+        <tr>
+            <td>
+                <form>
+                    <select id="v2">
+                        <option selected>Length</option>
+                        <option>Centimeters</option>
+                        <option>Meters</option>
+                        <option>Kilometers</option>
+                    </select>
+                </form>
+            <th>
+                <input id="input" type="number" placeholder="Enter number here">
+            </th>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <form>
+                    <select id="v1">
+                        <option selected>Length</option>
+                        <option>Centimeters</option>
+                        <option>Meters</option>
+                        <option>Kilometers</option>
+                    </select>
+                </form>
+            </th>
+            <td>
+                <p id="output"></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" value="Compute" onclick="Compute()">
+            </td>
+        </tr>
+
+    </table>
+    <script>
+        function Compute() {
+            let measure1 = document.getElementById("v1").value;
+            let measure2 = document.getElementById("v2").value;
+            let output;
+
+            let input = parseFloat(document.getElementById("input").value);
+
+            const getRate = unit => {
+                switch (unit) {
+                    case "Centimeters":
+                        rate = 0.01;
+                        break;
+                    case "Meters":
+                        rate = 1;
+                        break;
+                    case "Kilometers":
+                        rate = 1000;
+                        break;
+                    default:
+                        rate = undefined;
+                }
+
+                return rate;
+            }
+
+            let m1 = getRate(measure1);
+            let m2 = getRate(measure2);
+
+            if (m1 == m2) {
+                alert("Please select different units.");
+                return;
+            }
+
+            if (m1 && m2) {
+                if (!isNaN(input)) {
+                    if (input >= 0)
+                        output = input * (m2 / m1);
+                    else
+                        output = "Please enter only positive numbers";
+                }
+                else
+                    output = "Please enter a number";
+            }
+            else
+                output = "Please select a unit";
+
+            document.getElementById("output").innerText = output;
+        }
+    </script>
+</body>
+
+</html>
+<!-- v1= value 1 | v2= value 2 out = cm -->
